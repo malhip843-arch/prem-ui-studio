@@ -2,152 +2,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Account | Prem UI Studio</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #101827;
-      color: white;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-    }
-    .signup {
-      width: min(360px, 85%);
-      padding: 28px;
-      background: #1e293b;
-      border-radius: 16px;
-    }
-    h2 { text-align: center; }
-    input, button {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 13px;
-      margin: 9px 0;
-      border-radius: 8px;
-      border: 1px solid #475569;
-    }
-    button {
-      background: #7c3aed;
-      color: white;
-      border: 0;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    #otpSection { display: none; }
-    #message { text-align: center; color: #a7f3d0; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prem UI Studio - Sign Up</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #101827;
+  font-family: Arial, sans-serif;
+  color: white;
+  padding: 20px;
+}
+.container {
+  width: 100%;
+  max-width: 420px;
+  background: #1c293b;
+  padding: 30px;
+  border-radius: 15px;
+}
+h1 { text-align: center; }
+p { text-align: center; color: #bdc9d9; }
+input {
+  width: 100%;
+  padding: 13px;
+  margin: 9px 0;
+  border: 1px solid #40516a;
+  border-radius: 7px;
+  background: #101827;
+  color: white;
+}
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 15px;
+  border: 0;
+  border-radius: 7px;
+  background: #3878f5;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+#message {
+  text-align: center;
+  margin-top: 15px;
+  overflow-wrap: anywhere;
+}
+a { color: #75a7ff; }
+</style>
 </head>
 <body>
-  <div class="signup">
-    <h2>Create Account</h2>
 
-    <form id="signupForm">
-      <input id="name" placeholder="Full Name" required>
-      <input id="email" type="email" placeholder="Email Address" required>
-      <input id="phone" type="tel" placeholder="Phone (+923001234567)" required>
-      <input id="password" type="password" placeholder="Password (6+ characters)" required minlength="6">
-      <input id="confirmPassword" type="password" placeholder="Confirm Password" required>
-      <button type="submit" id="sendOtp">Create Account & Send OTP</button>
-    </form>
+<div class="container">
+  <h1>Create Account</h1>
+  <p>Join Prem UI Studio</p>
 
-    <div id="recaptcha-container"></div>
+  <form id="signupForm">
+    <input id="fullName" type="text"
+      placeholder="Full Name" required>
 
-    <div id="otpSection">
-      <p>Enter the 6-digit OTP sent to your phone.</p>
-      <input id="otp" type="text" inputmode="numeric" maxlength="6" placeholder="Enter OTP">
-      <button id="verifyOtp" type="button">Verify OTP</button>
-    </div>
+    <input id="email" type="email"
+      placeholder="Email Address">
 
-    <p id="message"></p>
-  </div>
+    <input id="phone" type="tel"
+      placeholder="Phone Number (+923...)" required>
 
-  <script type="module">
-    import { auth } from "./firebase.js";
+    <input id="password" type="password"
+      placeholder="Password (minimum 8 characters)"
+      minlength="8" required>
 
-    import {
-      createUserWithEmailAndPassword,
-      updateProfile,
-      RecaptchaVerifier,
-      linkWithPhoneNumber
-    } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+    <input id="confirmPassword" type="password"
+      placeholder="Confirm Password" required>
 
-    const form = document.getElementById("signupForm");
-    const message = document.getElementById("message");
-    const otpSection = document.getElementById("otpSection");
+    <button id="signupButton" type="submit">
+      Create Account
+    </button>
+  </form>
 
-    let confirmationResult = null;
+  <div id="message"></div>
+  <p>Already registered? <a href="login.html">Login</a></p>
+</div>
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+<script>
+const form = document.getElementById("signupForm");
+const message = document.getElementById("message");
+const button = document.getElementById("signupButton");
 
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const password = document.getElementById("password").value;
-      const confirmPassword = document.getElementById("confirmPassword").value;
+form.addEventListener("submit", async function(event) {
+  event.preventDefault();
 
-      if (password !== confirmPassword) {
-        message.textContent = "Passwords do not match.";
-        return;
-      }
+  const fullName = document.getElementById("fullName").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
 
-      if (!/^\+[1-9]\d{7,14}$/.test(phone)) {
-        message.textContent = "Phone must include country code, e.g. +923001234567";
-        return;
-      }
+  if (password !== confirmPassword) {
+    message.textContent = "Passwords do not match!";
+    return;
+  }
 
-      try {
-        message.textContent = "Creating your account...";
+  button.disabled = true;
+  button.textContent = "Please wait...";
+  message.textContent = "";
 
-        const result = await createUserWithEmailAndPassword(
-          auth, email, password
-        );
-
-        await updateProfile(result.user, {
-          displayName: name
-        });
-
-        const verifier = new RecaptchaVerifier(
-          auth,
-          "recaptcha-container",
-          { size: "normal" }
-        );
-
-        confirmationResult = await linkWithPhoneNumber(
-          result.user,
+  try {
+    const response = await fetch(
+      "https://prem-ui-studio-production.up.railway.app/api/signup",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          fullName,
+          email,
           phone,
-          verifier
-        );
-
-        otpSection.style.display = "block";
-        form.style.display = "none";
-        message.textContent = "OTP sent! Please verify your phone.";
-
-      } catch (error) {
-        message.textContent = error.message;
+          password
+        })
       }
-    });
+    );
 
-    document.getElementById("verifyOtp").addEventListener("click", async () => {
-      const code = document.getElementById("otp").value.trim();
+    const result = await response.json();
 
-      if (!confirmationResult || !/^\d{6}$/.test(code)) {
-        message.textContent = "Please enter the 6-digit OTP.";
-        return;
-      }
+    if (response.ok) {
+      message.textContent =
+        "Account created! Phone verification is still required.";
+      message.style.color = "#62e69b";
+      form.reset();
+    } else {
+      message.textContent = result.message || "Signup failed.";
+      message.style.color = "#ff7777";
+    }
 
-      try {
-        await confirmationResult.confirm(code);
-        message.textContent = "Account created and phone verified successfully!";
-        otpSection.style.display = "none";
-      } catch (error) {
-        message.textContent = "OTP verification failed: " + error.message;
-      }
-    });
-  </script>
+  } catch (error) {
+    message.textContent = "Connection error. Please try again.";
+    message.style.color = "#ff7777";
+  }
+
+  button.disabled = false;
+  button.textContent = "Create Account";
+});
+</script>
+
 </body>
 </html>
