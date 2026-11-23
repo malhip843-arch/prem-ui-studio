@@ -1,0 +1,13 @@
+
+{
+  "name": "prem-ui-studio-backend",
+  "version": "1.0.0",
+  "description": "Prem UI Studio backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
