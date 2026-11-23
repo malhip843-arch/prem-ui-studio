@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Dashboard — Prem UI Studio</title><link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="index.html"><span class="mark">P</span> PREM<span>/UI</span></a><div class="top-actions"><span class="status">● DEMO ADMIN</span><a href="index.html">← View website</a></div></header>
+<main class="wrap">
+  <div class="intro"><div><p class="eyebrow">WORKSPACE / CONTROL CENTER</p><h1>Admin <em>dashboard.</em></h1><p class="sub">Manage your portfolio project list in this browser preview.</p></div><div class="avatar">P</div></div>
+  <section class="stats"><article><small>TOTAL PROJECTS</small><b id="totalProjects">03</b><span>Portfolio items</span></article><article><small>DEMO STATUS</small><b class="green">Active</b><span>Local browser mode</span></article><article><small>STUDIO</small><b>Prem UI</b><span>Portfolio workspace</span></article></section>
+  <section class="panel"><div class="panel-head"><div><p class="eyebrow">PORTFOLIO CONTENT</p><h2>Manage projects</h2></div><button class="primary" id="addBtn">＋ Add project</button></div>
+    <div class="notice">ⓘ Demo mode: changes are saved only in this browser using local storage. They do not yet update the public website for other visitors. A secure shared admin system needs a backend and database.</div>
+    <div class="project-list" id="projectList"></div>
+  </section>
+  <section class="panel form-panel" id="formPanel" hidden><div class="panel-head"><div><p class="eyebrow">PROJECT DETAILS</p><h2 id="formTitle">Add a project</h2></div><button class="close" id="closeForm" aria-label="Close">×</button></div>
+    <form id="projectForm"><input type="hidden" id="editId"><label>Project name<input id="name" required maxlength="50" placeholder="e.g. Fitness app"></label><label>Category<input id="category" required maxlength="40" placeholder="e.g. HEALTH & FITNESS"></label><label>Short description<input id="description" required maxlength="100" placeholder="A short project summary"></label><div class="form-actions"><button class="primary" type="submit">Save project</button><button class="secondary" type="button" id="cancelBtn">Cancel</button></div></form>
+  </section>
+  <footer>PREM UI STUDIO © 2026 <span>Built for ideas that feel alive ✳</span></footer>
+</main>
+<script src="admin.js"></script>
+</body></html>
