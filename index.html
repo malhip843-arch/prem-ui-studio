@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Prem UI Studio — interactive app concepts and UI portfolio.">
+  <title>Prem UI Studio — Interfaces that feel alive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="orb orb-one"></div><div class="orb orb-two"></div>
+  <header class="nav-wrap">
+    <nav class="nav container">
+      <a class="brand" href="#home"><span class="brand-mark">P</span><span>PREM<span class="muted">/UI</span></span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#work">Work</a><a href="#demos">Live demos</a><a href="#about">About</a><a href="#contact">Contact</a>
+      </div>
+      <a class="nav-cta" href="#demos">Explore demos <span>↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> DIGITAL PRODUCT DESIGN & DEVELOPMENT</div>
+        <h1>Interfaces that<br><span class="gradient-text">feel alive.</span></h1>
+        <p class="hero-lead">A little studio for bold ideas, thoughtful interfaces and delightful digital experiences. Explore concepts you can actually click.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#demos">Explore live demos <span>↗</span></a><a class="text-link" href="#work">View selected work <span>↓</span></a></div>
+        <div class="hero-meta"><div><strong>03</strong><span>Interactive concepts</span></div><div><strong>UI × UX</strong><span>Design direction</span></div><div><strong>100%</strong><span>Responsive layouts</span></div></div>
+      </div>
+      <div class="hero-art">
+        <div class="art-glow"></div>
+        <div class="float-tag tag-top">✦ Designed to delight</div>
+        <div class="phone phone-back"><div class="phone-notch"></div><div class="mini-top">Good morning <b>☀</b></div><div class="mini-title">Find your<br>next favourite.</div><div class="mini-search">⌕ Search anything</div><div class="mini-food"></div><div class="mini-row"><i></i><i></i><i></i></div></div>
+        <div class="phone phone-front"><div class="phone-notch"></div><div class="phone-head"><span>9:41</span><span>•••</span></div><div class="app-kicker">YOUR DAILY SPACE</div><div class="app-heading">Make room<br>for <em>good things.</em></div><div class="app-card"><div class="app-card-icon">✦</div><span>Today’s inspiration</span><b>Small steps.<br>Big momentum.</b><small>Explore your day →</small></div><div class="app-tabs"><span>⌂</span><span>♡</span><span>◉</span><span>☻</span></div></div>
+        <div class="float-tag tag-bottom"><span class="spark">✳</span> Made for humans</div>
+      </div>
+    </section>
+
+    <section class="ticker"><div class="ticker-track"><span>DESIGN WITH PURPOSE ✳</span><span>BUILD WITH CARE ✳</span><span>MAKE IT FEEL SIMPLE ✳</span><span>DESIGN WITH PURPOSE ✳</span><span>BUILD WITH CARE ✳</span></div></section>
+
+    <section class="section container" id="work">
+      <div class="section-head"><div><div class="eyebrow">SELECTED CONCEPTS / 01</div><h2>Good ideas,<br><span class="muted">beautifully made.</span></h2></div><p>Explorations across everyday digital experiences — from finding dinner to getting somewhere new.</p></div>
+      <div class="project-grid">
+        <article class="project project-large"><div class="project-visual food-visual"><div class="food-window"><div class="food-top"><span>taste.</span><span>☰</span></div><div class="food-copy">A little joy<br>in every <i>bite.</i></div><div class="food-dish">🥗</div><div class="food-bottom"><span>Fresh picks for you</span><b>Explore menu ↗</b></div></div></div><div class="project-info"><div><span class="project-type">FOOD & LIFESTYLE</span><h3>Taste — Food delivery</h3></div><a href="#demos" class="round-arrow">↗</a></div></article>
+        <article class="project"><div class="project-visual ride-visual"><div class="map-lines"></div><div class="map-pin">↗</div><div class="ride-card"><small>YOUR RIDE IS READY</small><b>Where to next?</b><span>📍 Current location</span><span>🏁 Choose destination</span></div></div><div class="project-info"><div><span class="project-type">MOBILITY</span><h3>Go — Ride booking</h3></div><a href="#demos" class="round-arrow">↗</a></div></article>
+        <article class="project"><div class="project-visual shop-visual"><div class="shop-card"><small>THE EVERYDAY EDIT</small><b>Less, but<br><i>better.</i></b><div class="shop-product">◒</div><span>Objects for good living</span></div></div><div class="project-info"><div><span class="project-type">COMMERCE</span><h3>Forma — Shopping</h3></div><a href="#demos" class="round-arrow">↗</a></div></article>
+      </div>
+    </section>
+
+    <section class="demo-section" id="demos"><div class="container">
+      <div class="section-head demo-head"><div><div class="eyebrow">TRY IT YOURSELF / 02</div><h2>Not just pretty.<br><span class="muted">Tap around.</span></h2></div><p>These are small working prototypes. Switch between concepts and try the interactions.</p></div>
+      <div class="demo-shell">
+        <div class="demo-sidebar"><div class="sidebar-label">CHOOSE AN EXPERIENCE</div>
+          <button class="demo-tab active" data-demo="food"><span>🥑</span><div><b>Taste</b><small>Food delivery</small></div><i>↗</i></button>
+          <button class="demo-tab" data-demo="ride"><span>🚕</span><div><b>Go</b><small>Ride booking</small></div><i>↗</i></button>
+          <button class="demo-tab" data-demo="shop"><span>🛍️</span><div><b>Forma</b><small>Online shopping</small></div><i>↗</i></button>
+          <div class="sidebar-note"><span>✳</span><p>Concept demos<br>made for exploration.</p></div>
+        </div>
+        <div class="demo-stage">
+          <div class="stage-top"><span><i class="live-dot"></i> LIVE PREVIEW</span><span id="demoLabel">TASTE / FOOD DELIVERY</span></div>
+          <div class="demo-content" id="demoContent"></div>
+        </div>
+      </div>
+    </div></section>
+
+    <section class="section container about-section" id="about">
+      <div class="about-stamp">✳<br>CREATIVE<br>BY NATURE</div>
+      <div><div class="eyebrow">A SMALL INTRODUCTION / 03</div><h2>Curious mind.<br><span class="gradient-text">Careful craft.</span></h2><p class="about-text">Prem UI Studio is a personal concept space exploring how useful products can also feel warm, clear and memorable. Every screen starts with a simple question: how can this be easier for someone?</p><div class="skill-list"><span>UI DESIGN</span><span>INTERACTION</span><span>HTML / CSS</span><span>JAVASCRIPT</span><span>RESPONSIVE WEB</span></div></div>
+    </section>
+
+    <section class="contact-section" id="contact"><div class="container contact-inner"><div class="eyebrow">HAVE AN IDEA? / 04</div><h2>Let’s make<br>something <span class="gradient-text">useful.</span></h2><p>Have a project, suggestion or collaboration in mind? Start a conversation.</p><a class="btn btn-light" href="mailto:hello@premuistudio.example">Say hello <span>↗</span></a><div class="contact-foot"><span>PREM UI STUDIO © 2026</span><span>MADE WITH CURIOSITY ✳</span></div></div></section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
