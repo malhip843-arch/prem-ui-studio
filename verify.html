@@ -1,13 +1,114 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Phone Verification - Prem UI Studio</title>
+<style>
+body {
+  background: #101827;
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.box {
+  background: #1e293b;
+  padding: 30px;
+  border-radius: 15px;
+  width: 320px;
+  max-width: 85%;
+  text-align: center;
+}
+input, button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  box-sizing: border-box;
+}
+button {
+  background: #6366f1;
+  color: white;
+  border: 0;
+  cursor: pointer;
+}
+#recaptcha-container { margin: 15px 0; }
+</style>
 </head>
 <body>
-<h2>Verify Your Phone Number</h2>
-<p>Phone OTP verification page</p>
-<p>Firebase connection will be added next.</p>
+<div class="box">
+<h2>Verify Your Phone</h2>
+<p>Enter your phone number with country code.</p>
+<input id="phone" type="tel" placeholder="+923001234567">
+<div id="recaptcha-container"></div>
+<button id="sendOtp">Send OTP</button>
+<input id="otp" type="text" placeholder="Enter OTP">
+<button id="verifyOtp">Verify OTP</button>
+<p id="message"></p>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAZ6PKZRgxc0et0fX6MwIIvhWX8B0mtmi0",
+  authDomain: "prem-ui-studio.firebaseapp.com",
+  projectId: "prem-ui-studio",
+  storageBucket:"prem-ui-studio.firebasestorage.app",
+  messagingSenderId:"112416764047",
+  appId:"1:112416764047:web:5d4d02e56bc50cc8dc40fa",
+  measurementId: "G-JYH6L10PJQ"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+let confirmationResult;
+
+const message = document.getElementById("message");
+
+window.recaptchaVerifier = new RecaptchaVerifier(
+  auth,
+  "recaptcha-container",
+  { size: "normal" }
+);
+
+document.getElementById("sendOtp").addEventListener("click", async () => {
+  try {
+    const phone = document.getElementById("phone").value.trim();
+    if (!phone.startsWith("+")) {
+      message.textContent = "Enter phone with country code, e.g. +92...";
+      return;
+    }
+    confirmationResult = await signInWithPhoneNumber(
+      auth, phone, window.recaptchaVerifier
+    );
+    message.textContent = "OTP sent by SMS!";
+  } catch (error) {
+    message.textContent = error.message;
+  }
+});
+
+document.getElementById("verifyOtp").addEventListener("click", async () => {
+  try {
+    if (!confirmationResult) {
+      message.textContent = "First send OTP.";
+      return;
+    }
+    const otp = document.getElementById("otp").value.trim();
+    const result = await confirmationResult.confirm(otp);
+    message.textContent = "Phone verified successfully!";
+  } catch (error) {
+    message.textContent = "Invalid OTP. Please try again.";
+  }
+});
+</script>
 </body>
 </html>
