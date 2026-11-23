@@ -130,8 +130,8 @@ form.addEventListener("submit", async function(event) {
     const result = await response.json();
 
     if (response.ok) {
-      message.textContent =
-        "Account created! Phone verification is still required.";
+message.textContent = "Account created! Redirecting...";
+window.location.href = "verify.html";
       message.style.color = "#62e69b";
       form.reset();
     } else {
