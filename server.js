@@ -52,7 +52,7 @@ app.get("/health", (req, res) => {
   res.json({
     status: "ok",
     database: "connected",
-    firebase: firebaseReady ? "connected" : "not configured",
+ firebase: firebaseReady ? "connected" : "not configured",
     firebaseError: firebaseError
   });
 });
