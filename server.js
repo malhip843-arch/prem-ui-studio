@@ -41,6 +41,7 @@ try {
   firebaseReady = true;
 } catch (error) {
   console.error("Firebase Admin setup error:", error.message);
+  firebaseError = error.message;
 }
 
 app.get("/", (req, res) => {
