@@ -28,7 +28,7 @@ db.exec(`
 `);
 
 let firebaseReady = false;
-
+let firebaseError = "";
 try {
   const serviceAccount = JSON.parse(
     process.env.FIREBASE_SERVICE_ACCOUNT
