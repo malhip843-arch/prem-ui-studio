@@ -52,11 +52,11 @@ app.get("/health", (req, res) => {
   res.json({
     status: "ok",
     database: "connected",
- firebase: firebaseReady ? "connected" : "not configured",
+    firebase: firebaseReady ? "connected" : "not configured",
+    firebaseVariablePresent: Boolean(process.env.FIREBASE_SERVICE_ACCOUNT),
     firebaseError: firebaseError
   });
 });
-
 app.post("/api/signup", async (req, res) => {
   try {
     const { fullName, email, phone, password } = req.body;
